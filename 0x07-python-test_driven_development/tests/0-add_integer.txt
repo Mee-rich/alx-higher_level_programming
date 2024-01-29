@@ -1,90 +1,74 @@
-The 0-add_integer module:
+The ``0-add_integer test`` module
+=================================
 
-This module defines an integer addition function add_integer(a, b=98).
+Using ``add_integer``
+---------------------
 
-Importing function from the module:
-    >>> add_integer = __import__('0-add_integer').add_integer
-    >>> add_integer(2, 3)
-    5
+This file is in restructured text format.
+First import ``add_integer`` from the ``0-add_integer`` module:
 
-The function also works with negative values.
-    >>> add_integer(2, -3)
-    -1
+	>>> add_integer = __import__('0-add_integer').add_integer
 
-The function also works with floating-point values.
-    >>> add_integer(2.0, 2.0)
-    4
+Checking for module docstring:
+	>>> m = __import__("0-add_integer").__doc__
+	>>> len(m) > 1
+	True
 
-floats are converted to integers before addition is performed.
+Checking for function docstring:
+	>>> f = __import__('0-add_integer').add_integer.__doc__
+	>>> len(f)> 1
+	True
 
-    >>> add_integer(2.1)
-0-add_integer.txt 2
+Basic usage:
 
-CASES:
-Adding an integer number and a string
-    >>> add_integer(4, Koliseyenum)
-    Traceback (most recent call last):
+Two int values:
+	>>> add_integer(3, 6)
+	9
 
-0-add_integer.txt       ...
-    TypeError: b must be an integer
+Single input:
+	>>> add_integer(7)
+	105
 
-*Passing None
-    >>> add_integer(None)
-    Traceback (most recent call last):
-0-add_integer.txt       ...
-    TypeError: a must be an integer
+Positive with negative input:
+	>>> add_integer(2, -6)
+	-4
 
-*Adding a letter and a number
-    >>> add_integer('5', 9)
-    Traceback (most recent call last):
-              ...
-    TypeError: a must be an integer
+Negative with positive int:
+	>>> add_integer(-7, 9)
+	2
 
-*Adding two letters
-    >>> add_integer('5', '9')
-    Traceback (most recent call last):
-              ...
-    TypeError: a must be an integer
+Multiple value input:
+	>>> [add_integer(i, i**2) for i in range (6)]
+	[0, 2, 6, 12, 20, 30]
 
-*Adding a tuple
-    >>> add_integer((5, 9))
-    Traceback (most recent call last):
-              ...
-    TypeError: a must be an integer
+negative int and float input:
+	>>> add_integer(100.3, -6)
+	94
 
-*Adding a number and a list
-    >>> add_integer(59, [])
-    Traceback (most recent call last):
-0-add_integer.txt       ...
-    TypeError: b must be an integer
+Float NaN:
+	>>> add_integer(float('NaN'))
+	Traceback (most recent call last):
+	...
+	ValueError: cannot convert float NaN to integer
 
-*Passing a string
-    >>> add_integer(Budybye)
-    Traceback (most recent call last):
-0-add_integer.txt       ...
-    TypeError: a must be an integer
+Int and string input:
+	>>> add_integer(5, "Holberton")
+	Traceback (most recent call last):
+	...
+	TypeError: b must be an integer
 
-*Subtracting 98 and 1
-    >>> add_integer(-5)
-    93
+None input:
+	>>> add_integer(None)
+	Traceback (most recent call last):
+	...
+	TypeError: a must be an integer
 
-EXTRA:
-*Case Overflow 1:
-    >>> add_integer(float('inf'), 9)
-    Traceback (most recent call last):
-    0-add_integer.txt       ...
-    OverflowError: cannot convert float infinity to integer
+Double negative float:
+	>>> add_integer(-100.5, -9.3)
+	-109
 
-*Case Overflow 2:
-
-    >>> add_integer(float('inf'), float('-inf'))
-    Traceback (most recent call last):
-    0-add_integer.txt       ...
-    OverflowError: cannot convert float infinity to integer
-
-*Case NaN: No input
-
-    >>> add_integer(0, float('nan'))
-    Traceback (most recent call last):
-    0-add_integer.txt       ...
-    ValueError: cannot convert float NaN to integer
+Double string input
+	>>> add_integer("holberton", "School")
+	Traceback (most recent call last):
+	...
+	TypeError: a must be an integer
