@@ -12,10 +12,13 @@ def say_my_name(first_name, last_name=""):
     Raises:
             TypeError: If name is not a string
     """
-    if type(first_name) is not str:
-        raise TypeError("first name must be string")
-
-    if type(last_name) is not str:
-        raise TypeError("last name must be string")
-
-    print("My name is {} {}".format(first_name, last_name))
+    if not isinstance(first_name, str):
+        raise TypeError("first name must be a string")
+    
+    if last_name is not None and not isinstance(last_name, str):
+        raise TypeError("last anme must be a string")
+   
+    if last_name is not None:
+        return (f"My name is {first_name} {last_name}")
+    else:
+        return (f"My name is {first_name}")

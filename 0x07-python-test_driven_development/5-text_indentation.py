@@ -15,13 +15,7 @@ def text_indentation(text):
     if type(text) is not str:
         raise TypeError("text must be a string")
 
-    string = text[:]
+    for delim in ".?:":
+        text = (delim + "\n\n").join(line.strip(" ") for line in text.split(delim))
 
-    for a in ".?:":
-        text_list = string.split(a)
-        string= ""
-        for i in text_list:
-            i = i.strip(" ")
-            string = i + a if string is "" else string + "\n\n" + i + a
-
-    print(string[:-3], end="")
+    print(text, end="")

@@ -1,0 +1,54 @@
+This ``100-matrix_mul`` module
+==================================
+Function that multiplies 2 matrices
+Using ``matrix_mul``
+------------------------
+
+
+Importing the function:
+	
+	>>> matrix_mul = __import__('100-matrix_mul').matrix_mul
+
+Using it:
+
+string and int matrix as input:
+	>>> matrix_mul("Hello", [[1, 2]])
+	...
+	TypeError: m_a must be a list
+
+a string matrix and a float matrix:
+	>>>  matrix_mul(["Hello", "hi"], [[1, 2.0]])
+	...
+	TypeError: m_a must be a list of lists
+
+two empty matrix:
+	>>> matrix_mul([[]], [[]])
+	...
+	ValueError: m_a can't be empty
+
+String in matrix:
+	>>> matrix_mul([[1, 2], ["Hello", 9]], [[9, 4], [2, 5]])
+	Traceback (most recent call last):
+	...
+	TypeError: m_a should contain only integers or floatsm_a should contain only integers or floats
+
+two matrix of different sizes:
+	>>> matrix_mul([[9, 4], [2, 7.0]], [[1], [4, 9]])
+	Traceback (most recent call last):
+	...
+	TypeError: Each row of m_b must be of the same size
+	
+	>>> matrix_mul([[9, 4, 4], [2, 8, 2]], [[1, 2], [4, 9]])
+	Traceback (most recent call last):
+	ValueError: m_a and m_b can't be multiplied
+
+single matrix is supplied:
+	Traceback (most recent call last):
+	...
+	TypeError: matrix_mul() missing 1 required positional argument: 'm_b'
+
+No input:
+	matrix_mul()
+	Traceback (most recent call last):
+	...
+	TypeError: matrix_mul() missing 2 required positional arguments: 'm_a' and 'm_b'

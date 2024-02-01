@@ -53,6 +53,12 @@ class TestMaxInteger(unittest.TestCase):
         result = max_integer(x)
         self.assertEqual(result, 6)
 
+    def test_max_in_the_middle(self):
+        """ Test when the max number is in the middle of the list"""
+        x = [1, 3, 4, 17, 10, 4, 2]
+        result = max_integer(x)
+        self.assertEqual(result, 17)
+
     def test_strings(self):
         """Test with a list of strings: should return the first string"""
         x = ["hi", "hello"]
