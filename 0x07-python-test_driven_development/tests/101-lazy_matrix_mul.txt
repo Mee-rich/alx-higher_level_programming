@@ -1,0 +1,55 @@
+This ``101-lazy_matrix_mul`` module
+==================================
+Function that multiplies 2 matrices
+Using ``lazy_matrix_mul``
+------------------------
+
+
+Importing the function:
+	
+	>>> lazy_matrix_mul = __import__('101-lazy_matrix_mul').lazy_matrix_mul
+
+Using it:
+
+string and int matrix as input:
+	>>> lazy_matrix_mul("Hello", [[1, 2]])
+	Traceback (most recent call last):
+	...
+	NameError: name 'm_a' is not defined
+
+a string matrix and a float matrix:
+	>>>  lazy_matrix_mul(["Hello", "hi"], [[1, 2.0]])
+	Traceback (most recent call last):
+	...
+	IndentationError: unexpected indent
+
+two empty matrix:
+	>>> lazy_matrix_mul([[]], [[]])
+	Traceback (most recent call last):
+	...
+	NameError: name 'm_a' is not defined
+
+String in matrix:
+	>>> lazy_matrix_mul([[1, 2], ["Hello", 9]], [[9, 4], [2, 5]])
+	Traceback (most recent call last):
+	...
+	NameError: name 'm_a' is not defined
+
+two matrix of different sizes:
+	>>> lazy_matrix_mul([[9, 4], [2, 7.0]], [[1], [4, 9]])
+	Traceback (most recent call last):
+	...
+	TypeError: Each row of m_b must be of the same size
+	
+	>>> lazy_matrix_mul([[9, 4, 4], [2, 8, 2]], [[1, 2], [4, 9]])
+	Traceback (most recent call last):
+	ValueError: m_a and m_b can't be multiplied single matrix is supplied:
+	Traceback (most recent call last):
+	...
+	NameError: name 'm_a' is not defined
+
+No input:
+	lazy_matrix_mul()
+	Traceback (most recent call last):
+	...
+	TypeError: lazy_matrix_mul() missing 2 required positional arguments: 'm_a' and 'm_b'

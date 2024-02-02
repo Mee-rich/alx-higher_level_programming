@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <Python.h>
 
+void print_python_list(PyObject *p);
+void print_python_bytes(PyObject *p);
+
 /**
  * print_python_bytes - Prints bytes information
  *
@@ -10,7 +13,7 @@
 void print_python_bytes(PyObject *p)
 {
 	char *string;
-	long int size, limit;
+	long int i, size, limit;
 
 	printf("[.] bytes oject info\n");
 	if (!PyBytes_Check(p))
@@ -29,14 +32,14 @@ void print_python_bytes(PyObject *p)
 	else
 		limit = size + 1;
 
-	printf(" first %ld bytes:" limit);
+	printf(" first %ld bytes:", limit);
 	
 	for (i = 0; i < limit; i++)
 		if (string[i] >= 0)
 			printf(" %02x", string[i]);
 		else
 			printf(" %02x", 256 + string[i]);
-	printf("\n")
+	printf("\n");
 }
 
 /**
@@ -60,7 +63,7 @@ void print_python_list(PyObject *p)
 
 	for (i = 0; i < size; i++)
 	{
-		obj = ((PyListObject *)p)->ob_item[i];
+		obj = list->ob_item[i];
 		printf("Element %ld: %s\n", i, ((obj)->ob_type)->tp_name);
 		if(PyBytes_Check(obj))
 			print_python_bytes(obj);
