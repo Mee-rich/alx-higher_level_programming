@@ -25,9 +25,9 @@ class Square(Rectangle):
         super().__init__(size, size, x, y, id)
 
     def __str__(self):
-        """Prints square"""
+        """Prints a square representation"""
 
-        print("[{}] ({}) {}/{} - {}".format(type(self).__name__, self.id, self.x, self.y, self.size))
+        return ("[{}] ({:d}) {:d}/{:d} - {:d}".format(type(self).__name__, self.id, self.x, self.y, self.size)) 
 
     @property
     def size(self):
@@ -51,8 +51,30 @@ class Square(Rectangle):
         """
         if not isinstance(value, int):
             raise TypeError("width must be an integer")
-        if value <=0:
+        if value <= 0:
             raise ValueError("width must be > 0")
 
         self.width = value
         self.height = value
+
+
+    def update(self, *args, **kwargs):
+        """Updates the square and assign key/value argument to attributes.
+
+        Args:
+            *args - variable number of no-keyword
+            **kwargs - variable number of keyworded args
+        """
+        if len(args) == 0:
+            # If no positional arguments are provided, update using keyword arguments
+            for key, val in kwargs.items():
+                self.__setattr__(key, val)
+            return
+
+        try:
+            self.id = args[0]
+            self.size = args[1]
+            self.x = args[2]
+            self.y = args[3]
+        except IndexError:
+            pass

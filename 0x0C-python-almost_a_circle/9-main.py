@@ -13,7 +13,7 @@ if __name__ == "__main__":
 
     s2 = Square(2, 2)
     print(s2)
-    print(S2.area())
+    print(s2.area())
     s2.display()
 
     print("---")
