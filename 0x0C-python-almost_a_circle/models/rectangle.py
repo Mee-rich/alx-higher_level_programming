@@ -31,7 +31,7 @@ class Rectangle(Base):
 
     def __str__(self):
        """Prints rectangle"""
-       return ("[Rectangle] ({}) {:d}/{:d} - {:}/{:d}".format(self.id, self.__x, self.__y, self.__width, self.__height))
+       return ("[{}] ({}) {:d}/{:d} - {:d}/{:d}".format(type(self).__name__, self.id, self.__x, self.__y, self.__width, self.__height))
     
     @property
     def width(self):
@@ -144,3 +144,12 @@ class Rectangle(Base):
             int: area.
         """
         return (self.__width * self.height)
+
+    def display(self):
+        """Prints in stdout the Rectangle 
+            instance with the character #
+        """
+        for _ in range(self.y):
+            print()
+        for _ in range(self.height):
+            print(" " * self.x + "#" * self.width)
