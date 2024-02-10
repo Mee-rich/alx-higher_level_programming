@@ -2,6 +2,7 @@
 """Defines a class that inherits from Base"""
 
 from models.base import Base
+import os.path
 
 class Rectangle(Base):
     """Class that defines the properties of Rectangle.
@@ -178,5 +179,28 @@ class Rectangle(Base):
         return {'id': getattr(self, "id"), 'width': getattr(self, "width"),
                 'height': getattr(self, "height"), 'x': getattr(self, "x"),
                 'y': getattr(self, "y")}
+        
+    @classmethod
+    def load_from_file(cls):
+        """Returns a list of instances
 
+        Args:
+            cls: The class type
+        Returns:
+            list: list of instances.
+        """
+        filename = "{}.json".format(cls.__name__)
 
+        if os.path.exists(filename) is False:
+            return []
+       
+        with open(filename, 'r') as f:
+            list_str = f.read()
+
+        list_cls = cls.from_json_string(list_str)
+        list_ins = []
+
+        for index in range(len(list_cls)):
+            list_ins.append(cls.create(**list_cls[index]))
+
+        return list_ins
