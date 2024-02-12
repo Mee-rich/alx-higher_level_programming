@@ -99,3 +99,88 @@ class Base:
         dummy.update(**dictionary)
 
         return (dummy)
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """Serializes a list of rectangle or square in CSV
+
+        Args:
+            cls: the class
+            list_objs (list): objects
+        """
+        filename = cls.__name__ + ".csv"
+        with open(filename, 'w', newline="") as f:
+            writer = csv.writer(f)
+            if cls.__name__ == "Rectangle":
+                for i in list_objs:
+                    writer.writerow([i.id, i.width, i.height, i.x, i.y])
+            elif cls.__name__ == "Square":
+                for i in list_objs:
+                    writer.writerow([i.id, i.size, i.x, i.y])
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """Deserializes a list of rectangle or square in CSV.
+
+        Args:
+            cls: the class
+        """
+        filename = cls.__name__ + ".csv"
+        my_obj = []
+        try:
+            with open(filename, 'r') as f:
+                csv_reader = csv.reader(f)
+                for elm in csv_reader:
+                    dictionary = {"id": int(elm[0]), 
+                                "width": int(elm[1]),
+                                "height": int(elm[2]), 
+                                "x": int(elm[3]), 
+                                "y": int(elm[4])}
+
+                    obj = cls.create(**dictionary)
+                    my_obj.append(obj)
+        except Exception as e:
+            print(f"Error: {e}")
+        return(my_obj)
+
+    @staticmethod
+    def draw(list_rectangles, list_squares):
+        """opens a window and draws all th Rectangles and Squares.
+
+        Args:
+            list_rectangles (list): A list of rectangle objects to draw
+            list_squares (list): A list of square objects to draw
+        """
+        tur = turtle.Turtle()
+        tur.screen.bgcolor("#b731c")
+        tur.pensize(3)
+
+        tur.color("#ffffff")
+        for rect in list_rectangles:
+            tur.showturtle()
+            tur.up()
+            tur.goto(rect.x, rect.y)
+            tur.down()
+            for i in range(2):
+                tur.forward(rect.width)
+                tur.left(90)
+                tur.forward(rect.height)
+                tur.left(90)
+            tur.hideturtle()
+
+        tur.color("#b5e3d8")
+        for sq in list_squares:
+            tur.showturtle()
+            tur.up()
+            tur.goto(sq.width)
+            tur.up()
+            tur.goto(sq.x, sq.y)
+            tur.down()
+            for i in range(2):
+                tur.forward(sq.width)
+                tur.left(90)
+                tur.forward(sq.height)
+                tur.left(90)
+            tur.hideturtle()
+
+        turtle.exitonclick()
