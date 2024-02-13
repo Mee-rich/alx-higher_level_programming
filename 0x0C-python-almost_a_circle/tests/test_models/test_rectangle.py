@@ -81,7 +81,7 @@ class TestRectangle_instantiation(unittest.TestCase):
         self.assertEqual(7, r.height)
 
     def test_height_setter(self):
-        r = Rectangle(5 7, 5, 1)
+        r = Rectangle(5, 7, 5, 1)
         r.height = 10
         self.assertEqual(10, r.height)
 
@@ -205,7 +205,7 @@ class TestRectangle_height(unittest.TestCase):
 
     def test_set_height(self):
         with self.assertRaisesRegex(TypeError, "height must be an integer"):
-            Rectangle(1, {1 2, 3})
+            Rectangle(1, {1, 2, 3})
 
     def test_tuple_height(self):
         with self.assertRaisesRegex(TypeError, "height must be an integer"):
@@ -388,7 +388,7 @@ class TestRectangle_y(unittest.TestCase):
 
     
 
-class TestRectangle_order_of_initialization(unittest.Testcase):
+class TestRectangle_order_of_initialization(unittest.TestCase):
     """Unittests for testing order of attribute initialization"""
 
     def test_width_before_height(self):
@@ -463,7 +463,7 @@ class TestRectangle_stdout(unittest.TestCase):
 
     # Test __str__ method
     def test_str_method_print_width_height(self):
-        r = Rectangle(4 6)
+        r = Rectangle(4, 6)
         capture = TestRectangle_stdout.capture_stdout(r, "print")
         correct = "[Rectangle] ({}) 0/0 - 4/6\n".format(r.id)
         self.assertEqual(correct, capture.getvalue())
@@ -480,7 +480,7 @@ class TestRectangle_stdout(unittest.TestCase):
 
     def test_str_method_width_height_x_y_id(self):
         r = Rectangle(13, 21, 2, 4, 7)
-         self.assertEqual("[Rectangle] (7) 2/4 - 13/21", str(r))
+        self.assertEqual("[Rectangle] (7) 2/4 - 13/21", str(r))
 
     def test_str_method_changed_attributes(self):
         r = Rectangle(7, 7, 0, 0, [4])
@@ -497,7 +497,7 @@ class TestRectangle_stdout(unittest.TestCase):
 
     # Test display method
     def test_display_width_height(self):
-        r = Rectangle(2, 3, 0 0, 0)
+        r = Rectangle(2, 3, 0, 0, 0)
         capture = TestRectangle_stdout.capture__stdout(r, "display")
         self.assertEqual("##\n##\n##\n", capture.getvalue())
 
@@ -616,8 +616,8 @@ class TestRectangle_update_args(unittest.TestCase):
 
     def test_update_args_y_negative(self):
         r = Rectangle(10, 10, 10, 10, 10)
-        with self.assertRaisesRegex(ValueError, "y must be >= 0")
-        r.update(89, 1, 2, 3, -6)
+        with self.assertRaisesRegex(ValueError, "y must be >= 0"):
+            r.update(89, 1, 2, 3, -6)
 
     def test_update_args_width_before_height(self):
         r = Rectangle(10, 10, 10, 10, 10)
