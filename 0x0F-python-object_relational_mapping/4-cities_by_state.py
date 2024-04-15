@@ -1,13 +1,13 @@
 #!/usr/bin/python3
 """Lists all states from the hbtn_0e_o_usa database. """
 
-from sys import argv
+from sys
 import MySQLdb
 
 if __name__ == "__main__":
     # Get MySQL credentials
     
-    db = MySQLdb.connect(user=argv[1], passwd=argv[2], db=argv[3])
+    db = MySQLdb.connect(user=sys.argv[1], passwd=sys.argv[2], db=sys.argv[3])
 
     # Connect to MySQL server
     cursor = db.cursor()
