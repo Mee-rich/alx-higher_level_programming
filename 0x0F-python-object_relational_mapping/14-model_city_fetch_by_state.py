@@ -1,17 +1,19 @@
 #!/usr/bin/python3
 """
-This script prints the State object id with the name
-passed as argument fro the database `hbtn_0e_6_usa`.
+Prints all City objects from the database `hbtn_0e_14_usa`.
 """
 
 from sys import argv
 from model_state import Base, State
+from model_city import City
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-if __name__ == "__main":
+
+if __name__ == "__main__":
     """
-    Access to the database and get a state from the database.
+    Access to the database and get the cities
+    from the databae
     """
 
     db_uri = 'mysql+mysqldb://{}:{}@localhost:3306/{}'.format(
@@ -20,9 +22,12 @@ if __name__ == "__main":
     Session = sessionmaker(bind=engine)
 
     session = Session()
-    instance = session.qury(State).filter(State.name == argv[4]).first()
 
-    if instance is None:
-        print('Not found')
-    else:
-        print('{0}'.format(instance.id))
+    query = session.query(City, State).join(State)
+
+    for _c, _s in query.all():
+        print("{}: ({:d}) {}".format(_s.name, _c.id, _c.name))
+
+    
+    session.commit()
+    session.close()
