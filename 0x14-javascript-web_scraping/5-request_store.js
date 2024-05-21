@@ -1,5 +1,5 @@
 #!/usr/bin/node
-# This script gets the contents of a webpage and stores it in a file
+// This script gets the contents of a webpage and stores it in a file
 
 const fs = require('fs');
 const request = require('request');

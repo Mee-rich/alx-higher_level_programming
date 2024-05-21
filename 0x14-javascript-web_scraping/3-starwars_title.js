@@ -1,5 +1,5 @@
 #!/usr/bin/node
-# This script prints the title of a Star Wars movie where the episode dnumber matches a a given integer
+// This script prints the title of a Star Wars movie where the episode dnumber matches a a given integer
 
 const request = require('request');
 const EpisodeNum = process.argv[2];
